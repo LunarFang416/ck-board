@@ -22,7 +22,13 @@ jobs:
 
       - name: Download dependencies
         working-directory: ${{ matrix.directory }}
-        run: npm ci
+        run: npm i eslint prettier
+        env: 
+          CI: false
+
+      - name: Download dependencies
+        working-directory: frontend
+        run: npm install --only=dev
         env: 
           CI: false
 
