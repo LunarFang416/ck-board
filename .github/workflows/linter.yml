@@ -7,7 +7,7 @@ jobs:
     name: Linting and Code Formating Check CI
     runs-on: ubuntu-latest
     strategy:
-      matrix: { directory : [frontend, backend] }
+      matrix: { directory : [frontend] }
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -17,8 +17,8 @@ jobs:
         with:
           node-version: '14'
           
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli > /dev/null
+      # - name: Install Angular CLI
+      #   run: npm install -g @angular/cli > /dev/null
 
       - name: Download dependencies
         working-directory: ${{ matrix.directory }}
@@ -27,7 +27,7 @@ jobs:
           CI: false
 
       - name: Download dependencies
-        working-directory: frontend
+        working-directory: ${{ matrix.directory }}
         run: npm install --only=dev
         env: 
           CI: false
