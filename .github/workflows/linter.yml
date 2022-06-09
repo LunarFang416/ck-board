@@ -23,6 +23,8 @@ jobs:
       - name: Download dependencies
         working-directory: ${{ matrix.directory }}
         run: npm ci
+        env: 
+          CI: false
 
       - name: Run Linter
         working-directory: ${{ matrix.directory }}
