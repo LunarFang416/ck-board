@@ -3,11 +3,10 @@ on: [pull_request]
 
 
 jobs: 
-  Linter:
+  Linter (frontend):
     name: Linting and Code Formating Check CI
     runs-on: ubuntu-latest
-    strategy:
-      matrix: { directory : [backend, frontend] }
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,25 +17,62 @@ jobs:
           node-version: '14'
 
       - name: Download dependencies
-        working-directory: ${{ matrix.directory }}
-        run: npm i eslint prettier
+        working-directory: frontend
+        run: npm i eslint prettier && npm install --only=dev
         env: 
           CI: false
 
-      - name: Download dependencies
-        working-directory: ${{ matrix.directory }}
-        run: npm install --only=dev
-        env: 
-          CI: false
+      # - name: Download dependencies
+      #   working-directory: ${{ matrix.directory }}
+      #   run: npm install --only=dev
+      #   env: 
+      #     CI: false
 
       - name: Run Linter
-        working-directory: ${{ matrix.directory }}
+        working-directory: frontend
         run: npm run style:linter
         env: 
           CI: false
 
       - name: Run Code Formatter
-        working-directory: ${{ matrix.directory }}
+        working-directory: frontend
+        run: npm run style:formatter
+        env: 
+          CI: false
+
+  Linter (backend):
+    name: Linting and Code Formating Check CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Download dependencies
+        working-directory: backend
+        run: npm i eslint prettier && npm install --only=dev
+        env: 
+          CI: false
+
+      # - name: Download dependencies
+      #   working-directory: ${{ matrix.directory }}
+      #   run: npm install --only=dev
+      #   env: 
+      #     CI: false
+
+      - name: Run Linter
+        working-directory: backend
+        run: npm run style:linter
+        env: 
+          CI: false
+
+      - name: Run Code Formatter
+        working-directory: backend
         run: npm run style:formatter
         env: 
           CI: false
