@@ -3,7 +3,7 @@ on: [pull_request]
 
 
 jobs: 
-  Linter (frontend):
+  Linter frontend:
     name: Linting and Code Formating Check CI
     runs-on: ubuntu-latest
 
@@ -40,7 +40,7 @@ jobs:
         env: 
           CI: false
 
-  Linter (backend):
+  Linter backend:
     name: Linting and Code Formating Check CI
     runs-on: ubuntu-latest
 
