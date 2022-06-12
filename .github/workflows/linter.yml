@@ -19,13 +19,7 @@ jobs:
 
       - name: Download dependencies
         working-directory: ${{ matrix.directory }}
-        run: npm i eslint prettier
-        env: 
-          CI: false
-
-      - name: Download dependencies
-        working-directory: ${{ matrix.directory }}
-        run: npm install --only=dev
+        run: npm cache clean --force && npm install
         env: 
           CI: false
 
