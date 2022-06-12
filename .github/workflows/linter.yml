@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: { directory : [backend, frontend] }
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3
