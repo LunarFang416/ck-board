@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from 'src/app/services/board.service';
 import { UserService } from 'src/app/services/user.service';
 import { FileUploadService } from 'src/app/services/fileUpload.service';
-import { Tag } from 'src/app/models/post';
+import { Tag } from 'src/app/models/tag';
 import { TAG_DEFAULT_COLOR } from 'src/app/utils/constants';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { Board, BoardPermissions } from 'src/app/models/board';
@@ -28,10 +28,10 @@ export class ConfigurationModalComponent {
   permissions: BoardPermissions;
 
   tags: Tag[];
-  newTagText: string = '';
+  newTagText = '';
   newTagColor: any = TAG_DEFAULT_COLOR;
 
-  initialZoom: number = 100;
+  initialZoom = 100;
 
   members: string[] = [];
 
@@ -77,7 +77,7 @@ export class ConfigurationModalComponent {
     this.fileUploadService.compressFile().then(async (compressedImage) => {
       this.newCompressedImage = compressedImage;
 
-      let board = await this.canvasService.updateBoardImage(
+      const board = await this.canvasService.updateBoardImage(
         this.boardID,
         this.newCompressedImage
       );
